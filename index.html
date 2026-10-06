@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divulgação de Estágios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            background-color: #fafaf9;
+            color: #292524;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+            background: #ffffff;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e7e5e4;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #1c1917;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 32px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d6d3d1;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: #f59e0b;
+        }
+
+        button {
+            background-color: #f59e0b;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #d97706;
+        }
+
+        h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #44403c;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #f5f5f4;
+        }
+
+        th {
+            font-weight: 600;
+            color: #78716c;
+            background-color: #fafaf9;
+        }
+
+        td {
+            color: #292524;
+        }
+
+        .empty {
+            text-align: center;
+            color: #a8a29e;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Divulgação de Estágios</h1>
+
+        <form id="vagaForm">
+            <input type="text" id="cargo" placeholder="Cargo (Ex: Estágio em TI)" required>
+            <input type="text" id="empresa" placeholder="Nome da Empresa" required>
+            <button type="submit">Cadastrar Vaga</button>
+        </form>
+
+        <h2>Vagas Disponíveis</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cargo</th>
+                        <th>Empresa</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaVagas">
+                    <tr id="linhaVazia">
+                        <td colspan="2" class="empty">Nenhuma vaga cadastrada ainda.</td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+
+    <script>
+        const form = document.getElementById('vagaForm');
+        const tabelaVagas = document.getElementById('tabelaVagas');
+        const linhaVazia = document.getElementById('linhaVazia');
+
+        form.addEventListener('submit', function(evento) {
+            evento.preventDefault();
+
+            const cargo = document.getElementById('cargo').value;
+            const empresa = document.getElementById('empresa').value;
+
+            if (linhaVazia) {
+                linhaVazia.remove();
+            }
+
+            const novaLinha = document.createElement('tr');
+            novaLinha.innerHTML = `
+                <td><strong>${cargo}</strong></td>
+                <td>${empresa}</td>
+            `;
+
+            tabelaVagas.appendChild(novaLinha);
+            form.reset();
+        });
+    </script>
+
+</body>
+</html>
